@@ -1,0 +1,12 @@
+{
+  "base_url": "/",
+  "hostname": "localhost",
+  "notebook_dir": "/home/ssm-user",
+  "password": false,
+  "pid": 25913,
+  "port": 8889,
+  "secure": false,
+  "sock": "",
+  "token": "72757c0d72cad6e99fc0993ceedf694b04fbc35dd1ff6dc7",
+  "url": "http://localhost:8889/"
+}

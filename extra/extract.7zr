@@ -1,0 +1,10 @@
+
+import py7zr
+archive_path = '/home/ssm-user/unixODBC-2.3.12.tar.gz'
+output_directory = '/home/ssm-user/unixODBC_output'
+
+# Using py7zr to extract the .7z archive
+with py7zr.SevenZipFile(archive_path, mode='r') as z:
+    z.extractall(path=output_directory)
+
+print("Extraction completed.")

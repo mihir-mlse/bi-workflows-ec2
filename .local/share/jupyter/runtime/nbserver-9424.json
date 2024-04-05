@@ -1,0 +1,12 @@
+{
+  "base_url": "/",
+  "hostname": "localhost",
+  "notebook_dir": "/home/ssm-user/venv/bi_prime",
+  "password": false,
+  "pid": 9424,
+  "port": 8888,
+  "secure": false,
+  "sock": "",
+  "token": "2f1e2426d96607092a9ca38978d4bf4a7c76f70e15b69d0f",
+  "url": "http://localhost:8888/"
+}
