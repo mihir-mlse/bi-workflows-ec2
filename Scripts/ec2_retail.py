@@ -122,7 +122,7 @@ import configparser
 
 # Load the configuration file
 config = configparser.ConfigParser()
-config.read('aws_config.conf')
+config.read('aws_credentials.conf')
 
 aws_access_key_id = config.get('default', 'aws_access_key_id')
 aws_secret_access_key = config.get('default', 'aws_secret_access_key')
@@ -146,18 +146,8 @@ bucket_name = 'retail-pos-bi-stage'
 s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Customize your file name
 
 
-s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
 
 
-parquet_buffer = BytesIO()
-final.to_parquet(parquet_buffer, engine='pyarrow', index=False)
-parquet_buffer.seek(0)
-
-bucket_name = 'retail-pos-stage-bi'
-s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'
-
-# Initialize S3 client
-#s3_client = boto3.client('s3')
 
 try:
     s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
