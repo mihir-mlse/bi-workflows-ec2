@@ -138,21 +138,51 @@ s3_client = boto3.client(
 
 )
 
-parquet_buffer = BytesIO()
-final.to_parquet(parquet_buffer, engine='pyarrow', index=False)
-parquet_buffer.seek(0)
 
+
+def upload_df_to_s3(dataframe, bucket, s3_file):
+    # Create a buffer
+    csv_buffer = io.StringIO()
+    
+    # Write the DataFrame to the buffer
+    dataframe.to_csv(csv_buffer, index=False)
+    
+    # Seek to the beginning of the StringIO object
+    csv_buffer.seek(0)
+    
+    try:
+        # Upload the buffer contents to S3
+        s3_client.put_object(Bucket=bucket, Key=s3_file, Body=csv_buffer.getvalue())
+        print(f"Upload successful: {s3_file}")
+    except boto3.exceptions.S3UploadFailedError as e:
+        print(f"Upload failed: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+# Replace with your S3 bucket name and desired destination file name
 bucket_name = 'retail-pos-bi-stage'
-s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Customize your file name
+s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.csv'
+
+# Upload the DataFrame directly to S3
+upload_df_to_s3(final, bucket_name, s3_file_name)
+
+
+
+# parquet_buffer = BytesIO()
+# final.to_parquet(parquet_buffer, engine='pyarrow', index=False)
+# parquet_buffer.seek(0)
+
+# bucket_name = 'retail-pos-bi-stage'
+# s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Customize your file name
 
 
 
 
-
-try:
-    s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
-    print(f"Upload successful: {s3_file_name}")
-except boto3.exceptions.S3UploadFailedError as e:
-    print(f"Upload failed: {e}")
-except Exception as e:
-    print(f"An error occurred: {e}")
+# try:
+#     s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
+#     print(f"Upload successful: {s3_file_name}")
+# except boto3.exceptions.S3UploadFailedError as e:
+#     print(f"Upload failed: {e}")
+# except Exception as e:
+#     print(f"An error occurred: {e}")
