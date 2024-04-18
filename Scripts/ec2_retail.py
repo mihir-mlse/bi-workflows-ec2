@@ -169,9 +169,9 @@ s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.csv'
 
 
 
-# parquet_buffer = BytesIO()
-# final.to_parquet(parquet_buffer, engine='pyarrow', index=False)
-# parquet_buffer.seek(0)
+parquet_buffer = BytesIO()
+final.to_parquet(parquet_buffer, engine='pyarrow', index=False)
+parquet_buffer.seek(0)
 
 # bucket_name = 'retail-pos-bi-stage'
 # s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Customize your file name
