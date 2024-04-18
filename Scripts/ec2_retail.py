@@ -161,8 +161,8 @@ s3_client = boto3.client(
 
 
 # Replace with your S3 bucket name and desired destination file name
-bucket_name = 'retail-pos-bi-stage'
-s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.csv'
+# bucket_name = 'retail-pos-bi-stage'
+# s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.csv'
 
 # Upload the DataFrame directly to S3
 # upload_df_to_s3(final, bucket_name, s3_file_name)
@@ -173,8 +173,8 @@ parquet_buffer = BytesIO()
 final.to_parquet(parquet_buffer, engine='pyarrow', index=False)
 parquet_buffer.seek(0)
 
-# bucket_name = 'retail-pos-bi-stage'
-# s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Customize your file name
+bucket_name = 'retail-pos-bi-stage'
+s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Customize your file name
 
 
 
