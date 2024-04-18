@@ -140,24 +140,24 @@ s3_client = boto3.client(
 
 
 
-def upload_df_to_s3(dataframe, bucket, s3_file):
-    # Create a buffer
-    csv_buffer = io.StringIO()
+# def upload_df_to_s3(dataframe, bucket, s3_file):
+#     # Create a buffer
+#     csv_buffer = io.StringIO()
     
-    # Write the DataFrame to the buffer
-    dataframe.to_csv(csv_buffer, index=False)
+#     # Write the DataFrame to the buffer
+#     dataframe.to_csv(csv_buffer, index=False)
     
-    # Seek to the beginning of the StringIO object
-    csv_buffer.seek(0)
+#     # Seek to the beginning of the StringIO object
+#     csv_buffer.seek(0)
     
-    try:
-        # Upload the buffer contents to S3
-        s3_client.put_object(Bucket=bucket, Key=s3_file, Body=csv_buffer.getvalue())
-        print(f"Upload successful: {s3_file}")
-    except boto3.exceptions.S3UploadFailedError as e:
-        print(f"Upload failed: {e}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+#     try:
+#         # Upload the buffer contents to S3
+#         s3_client.put_object(Bucket=bucket, Key=s3_file, Body=csv_buffer.getvalue())
+#         print(f"Upload successful: {s3_file}")
+#     except boto3.exceptions.S3UploadFailedError as e:
+#         print(f"Upload failed: {e}")
+#     except Exception as e:
+#         print(f"An error occurred: {e}")
 
 
 # Replace with your S3 bucket name and desired destination file name
@@ -165,7 +165,7 @@ bucket_name = 'retail-pos-bi-stage'
 s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.csv'
 
 # Upload the DataFrame directly to S3
-upload_df_to_s3(final, bucket_name, s3_file_name)
+# upload_df_to_s3(final, bucket_name, s3_file_name)
 
 
 
@@ -179,10 +179,10 @@ upload_df_to_s3(final, bucket_name, s3_file_name)
 
 
 
-# try:
-#     s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
-#     print(f"Upload successful: {s3_file_name}")
-# except boto3.exceptions.S3UploadFailedError as e:
-#     print(f"Upload failed: {e}")
-# except Exception as e:
-#     print(f"An error occurred: {e}")
+try:
+    s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
+    print(f"Upload successful: {s3_file_name}")
+except boto3.exceptions.S3UploadFailedError as e:
+    print(f"Upload failed: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
