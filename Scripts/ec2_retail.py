@@ -178,6 +178,7 @@ s3_file_name = f'bronze/2024/retail_pos_{fetch_day_formatted}.parquet'  # Custom
 
 
 
+print(datetime.now())
 
 try:
     s3_client.put_object(Bucket=bucket_name, Key=s3_file_name, Body=parquet_buffer.getvalue())
