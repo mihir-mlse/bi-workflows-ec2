@@ -2,3 +2,4 @@ bi_prime/
 Scripts/aws_credentials.conf
 test.ipynb
 py3_bi
+logs/
