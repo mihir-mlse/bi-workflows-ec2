@@ -103,7 +103,7 @@ final_deduped = final_deduped.drop_duplicates(subset=['event_date', 'team'])
 
 
 csv_buffer = StringIO()
-final_filtered_calendar.to_csv(csv_buffer, index=False)
+final_deduped.to_csv(csv_buffer, index=False)
 csv_buffer.seek(0)  # Go to the start of the StringIO object
 
 # URL to upload the CSV
