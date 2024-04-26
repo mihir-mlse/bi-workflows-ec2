@@ -8,7 +8,7 @@ from io import StringIO
 import requests
 
 today  = datetime.today().date()
-next_day = today + timedelta(50)
+next_day = today + timedelta(90)
 print(today)
 
 
