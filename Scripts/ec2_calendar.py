@@ -92,8 +92,8 @@ final_filtered_calendar = final_filtered_calendar[final_filtered_calendar['arena
 final_filtered_calendar.rename(columns={"event_line1": "promoter_name"},inplace=True)
 
 #adding to dedupe the live event!
-final_deduped = final_filtered_calendar.drop_duplicates(subset=['event_date', 'inet_event_name'])
-final_deduped = final_deduped.drop_duplicates(subset=['event_date', 'team'])
+# final_deduped = final_filtered_calendar.drop_duplicates(subset=['event_date', 'inet_event_name'])
+# final_deduped = final_deduped.drop_duplicates(subset=['event_date', 'team'])
 
 #final_filtered_calendar['promoter_name'] = 'TEST'
 
@@ -103,7 +103,7 @@ final_deduped = final_deduped.drop_duplicates(subset=['event_date', 'team'])
 
 
 csv_buffer = StringIO()
-final_deduped.to_csv(csv_buffer, index=False)
+final_filtered_calendar.to_csv(csv_buffer, index=False)
 csv_buffer.seek(0)  # Go to the start of the StringIO object
 
 # URL to upload the CSV
